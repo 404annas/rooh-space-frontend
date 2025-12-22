@@ -1,0 +1,54 @@
+🔥 Explanation of Key Folders
+1️⃣ api/
+
+Purpose: Sabhi network requests yahan se hote hain.
+
+axiosClient.js → base config + interceptors
+
+endpoints.js → sabhi URLs ek jagah store
+
+userApi.js → nearby rooms, profile, search, etc.
+
+adminApi.js → approve rooms, analytics, manage users
+
+2️⃣ components/
+
+common/ → Buttons, Inputs, Cards, Loader (reusable across User/Admin)
+
+layout/ → Navbar, Sidebar, Footer (different for User/Admin but shared styles)
+
+user/ → Map, RoomList, RoomCard (User portal specific)
+
+admin/ → RoomApprovalCard, AnalyticsChart, RoomForm (Admin specific)
+
+3️⃣ features/
+
+Redux slices or state management
+
+user/ → authSlice, roomsSlice, mapSlice
+
+admin/ → adminAuthSlice, adminRoomsSlice, approvalsSlice, analyticsSlice
+
+Purpose: Data coming from backend API → Redux state → UI components
+
+4️⃣ layouts/
+
+MainLayout → wrapper for all pages (e.g., Navbar + Footer)
+
+UserLayout → sidebar + header for user portal
+
+AdminLayout → dashboard sidebar + header
+
+5️⃣ pages/
+
+User pages: Home, Profile, RoomDetails
+
+Admin pages: Dashboard, Approvals, ManageRooms, Users
+
+6️⃣ routes/
+
+AppRoutes.jsx → defines all app routes
+
+UserRoute.jsx → checks if user is logged in before allowing access
+
+AdminRoute.jsx → checks if admin is logged in

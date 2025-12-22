@@ -1,0 +1,51 @@
+{
+    "components": [
+        {
+            "name": "User/Admin UI Component",
+            "description": "The user interface component that interacts with the user or admin."
+        },
+        {
+            "name": "API Function",
+            "description": "Function that calls the appropriate API (userApi or adminApi) to fetch or send data."
+        },
+        {
+            "name": "axiosClient.js",
+            "description": "A module that handles HTTP requests to the backend using Axios."
+        },
+        {
+            "name": "Backend",
+            "description": "The server-side application that processes requests and returns data in JSON format."
+        },
+        {
+            "name": "Redux Slice",
+            "description": "A part of the Redux state management that updates the application state based on the received data."
+        }
+    ],
+    "flow": [
+        {
+            "from": "User/Admin UI Component",
+            "to": "API Function",
+            "action": "calls"
+        },
+        {
+            "from": "API Function",
+            "to": "axiosClient.js",
+            "action": "sends request"
+        },
+        {
+            "from": "axiosClient.js",
+            "to": "Backend",
+            "action": "sends request"
+        },
+        {
+            "from": "Backend",
+            "to": "Redux Slice",
+            "action": "returns data (JSON)"
+        },
+        {
+            "from": "Redux Slice",
+            "to": "User/Admin UI Component",
+            "action": "updates state and re-renders automatically"
+        }
+    ]
+}

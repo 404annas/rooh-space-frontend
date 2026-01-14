@@ -42,7 +42,7 @@ const Register = () => {
           {/* Logo */}
           <div className="flex items-center gap-2 justify-center text-primary">
             <MapPin className="bg-primaryLight text-white w-10 h-10 p-2.5 rounded-full" />
-            <h1 className="text-4xl font-bold">RoohSpace</h1>
+            <Link to={"/"} className="text-4xl font-bold">RoohSpace</Link>
           </div>
 
           {/* Heading */}

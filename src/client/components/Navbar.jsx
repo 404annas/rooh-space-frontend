@@ -12,7 +12,7 @@ const Navbar = () => {
             <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-2'>
                     <MapPin className='bg-primaryLight p-2.5 w-11 h-11 rounded-full' />
-                    <h1 className='text-2xl font-bold'>RoohSpace</h1>
+                    <Link to={"/"} className='text-2xl font-bold'>RoohSpace</Link>
                 </div>
                 <div className='flex items-center gap-10'>
                     <Link

@@ -240,8 +240,8 @@ const Pricing = () => {
                                             <p className="text-sm text-gray-500 font-semibold mb-3">Limitations:</p>
                                             <div className="space-y-2">
                                                 {plan.limitations.map((limitation, lIdx) => (
-                                                    <div key={lIdx} className="flex items-start gap-2">
-                                                        <X size={16} className="text-gray-400 flex-shrink-0 mt-0.5" />
+                                                    <div key={lIdx} className="flex items-center gap-2">
+                                                        <X size={16} className="text-gray-400 flex-shrink-0" />
                                                         <span className="text-xs text-gray-500">{limitation}</span>
                                                     </div>
                                                 ))}

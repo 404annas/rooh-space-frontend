@@ -39,7 +39,7 @@ const Login = () => {
                 <div className="px-8 py-14 border rounded-xl max-w-xl w-full">
                     <div className="flex items-center gap-2 justify-center text-primary">
                         <MapPin className="bg-primaryLight text-white w-10 h-10 p-2.5 rounded-full" />
-                        <h1 className="text-4xl font-bold">RoohSpace</h1>
+                        <Link to={"/"} className="text-4xl font-bold">RoohSpace</Link>
                     </div>
                     <h1 className="text-xl font-semibold pb-1 pt-10 text-secondary">
                         Welcome Back!

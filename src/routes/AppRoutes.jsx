@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import ClientRoutes from "./client/ClientRoutes";
-import AdminRoutes from "./admin/AdminRoutes";
+import ClientRoutes from "../client/routes/ClientRoutes";
+import AdminRoutes from "../admin/routes/AdminRoutes";
 
 const AppRoutes = () => {
     return (

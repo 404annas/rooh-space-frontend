@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useAdminLoginMutation, useAdminLogoutMutation } from "../../features/admin/auth/adminApiSlice";
-import { setAdminCredentials } from "../../features/admin/auth/adminAuthSlice";
+import { useAdminLoginMutation, useAdminLogoutMutation } from "../../admin/features/auth/adminApiSlice";
+import { setAdminCredentials } from "../../admin/features/auth/adminAuthSlice";
 import { toast } from "sonner";
 
 export const useAdminAuth = () => {

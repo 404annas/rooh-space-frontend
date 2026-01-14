@@ -1,60 +1,63 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAdminAuth } from "../../hooks/admin/useAdminAuth";
+import { useUserAuth } from "../hooks/useUserAuth";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
-import { Mail, Lock, Eye, EyeOff, ShieldCheck, ArrowRight } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import mainImage from "../../assets/images/mainImage.avif"
 
-const AdminLogin = () => {
-    const { handleLogin, isLoading, error } = useAdminAuth();
+const Login = () => {
+    const { handleLogin, isLoading, error } = useUserAuth();
     const [showPassword, setShowPassword] = useState(false);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
     const onSubmit = (data) => {
-        handleLogin({ email: data.email, password: data.password });
+        handleLogin(data.email, data.password);
     };
 
     return (
-        <div className="flex h-screen bg-gray-100">
-
-            {/* LEFT SIDE IMAGE / GRAPHIC */}
-            <div className="w-1/2 h-full hidden lg:block">
+        <div className="flex h-screen">
+            {/* LEFT SIDE IMAGE */}
+            <div className="w-1/2 h-full">
                 <img
                     loading="lazy"
-                    src={mainImage}
-                    alt="Admin Dashboard"
                     className="w-full h-full object-cover object-bottom"
+                    src={mainImage}
+                    alt="Mosque"
                 />
             </div>
 
             {/* RIGHT SIDE FORM */}
-            <div className="w-full lg:w-1/2 flex justify-center items-center px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100">
-                <div className="p-10 rounded-xl border w-full max-w-xl">
-
-                    {/* Admin Logo / Icon */}
-                    <div className="flex items-center justify-center mb-6">
-                        <ShieldCheck className="text-primary w-12 h-12 mr-2" />
-                        <h1 className="text-3xl font-bold text-primary">Admin Portal</h1>
+            <div className="w-1/2 flex justify-center items-center px-4 bg-gradient-to-br from-[#e9f0ec] via-white to-[#e9f0ec]">
+                <div className="px-8 py-14 border rounded-xl max-w-xl w-full">
+                    <div className="flex items-center gap-2 justify-center text-primary">
+                        <MapPin className="bg-primaryLight text-white w-10 h-10 p-2.5 rounded-full" />
+                        <h1 className="text-4xl font-bold">RoohSpace</h1>
                     </div>
-
-                    <p className="text-secondary mb-6 text-center">
-                        Sign in with your admin account to manage the platform
+                    <h1 className="text-xl font-semibold pb-1 pt-10 text-secondary">
+                        Welcome Back!
+                    </h1>
+                    <p class="text-primaryLight font-medium text-sm pb-4">
+                        Sign in to find Salah spaces & share peaceful spots with others 🌿
                     </p>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1">
 
                         {/* Email */}
                         <div>
                             <p className="text-sm text-secondary pb-1">Email*</p>
                             <Input
                                 type="email"
-                                placeholder="admin@example.com"
+                                placeholder="Email Address"
                                 icon={Mail}
-                                className={`${errors.email ? "border-red-500" : "border-gray-300"} outline-none bg-transparent focus:border-primaryLight focus:ring-1 focus:ring-primaryLight`}
+                                className={`${errors.email ? "border-red-500" : ""} outline-none focus:border-primaryLight focus:ring-1 focus:ring-primaryLight bg-transparent`}
                                 {...register("email", {
                                     required: "Email is required",
                                     pattern: {
@@ -64,19 +67,19 @@ const AdminLogin = () => {
                                 })}
                             />
                             {errors.email && (
-                                <p className="text-red-500 text-sm -mt-2">{errors.email.message}</p>
+                                <p className="text-red-500 text-sm -mt-2 mb-2">{errors.email.message}</p>
                             )}
                         </div>
 
-                        {/* Password */}
                         <div>
                             <p className="text-sm text-secondary pb-1">Password*</p>
+                            {/* Password */}
                             <div className="relative w-full">
                                 <Input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder="Enter password"
+                                    placeholder="Password"
                                     icon={Lock}
-                                    className={`${errors.password ? "border-red-500" : "border-gray-300"} outline-none bg-transparent focus:primaryLight focus:ring-1 focus:ring-primaryLight`}
+                                    className={`${errors.password ? "border-red-500" : ""} outline-none focus:border-primaryLight focus:ring-1 focus:ring-primaryLight bg-transparent`}
                                     {...register("password", {
                                         required: "Password is required",
                                         minLength: {
@@ -93,26 +96,20 @@ const AdminLogin = () => {
                                 </div>
                             </div>
                             {errors.password && (
-                                <p className="text-red-500 text-sm -mt-2">{errors.password.message}</p>
+                                <p className="text-red-500 text-sm -mt-2 mb-2">{errors.password.message}</p>
                             )}
                         </div>
 
                         {/* Login Button */}
-                        <Button
-                            disabled={isLoading}
-                            isLoading={isLoading}
-                            icon={ArrowRight}
-                            text="Login"
-                            loadingText="Signing in..."
-                        />
+                        <Button disabled={isLoading} isLoading={isLoading} icon={ArrowRight} text="Sign In"
+                            loadingText="Signing in..." className="mt-2">
+                        </Button>
 
-                        {/* Links */}
-                        <div className="mt-4 text-sm text-gray-500">
-                            <span>
-                                Not an admin? <Link to={"/"} onClick={() => scrollTo(0,0)} className="text-primary font-semibold hover:underline">Go Home</Link>
-                            </span>
+                        {/* Lines & Links */}
+                        <div className="flex lg:flex-row gap-2 flex-col justify-between items-center mt-4 text-sm text-gray-500">
+                            <Link to={"/forgot-password"} onClick={() => scrollTo(0, 0)} className="hover:text-primaryLight underline">Forgot Password?</Link>
+                            <span>Account not exists? <Link to={"/register"} onClick={() => scrollTo(0, 0)} className="text-primaryLight font-semibold hover:underline">SignUp Now</Link></span>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -120,4 +117,4 @@ const AdminLogin = () => {
     );
 };
 
-export default AdminLogin;
+export default Login;

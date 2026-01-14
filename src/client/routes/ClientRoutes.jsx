@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "../../pages/client/Login";
-import Register from "../../pages/client/Register";
-import ForgotPassword from "../../pages/client/ForgotPassword";
-import Home from "../../pages/client/Home";
-import UserProfile from "../../pages/client/UserProfile";
-import About from "../../pages/client/About";
-import Contact from "../../pages/client/Contact";
+import Login from "../../client/pages/Login";
+import Register from "../../client/pages/Register";
+import ForgotPassword from "../../client/pages/ForgotPassword";
+import Home from "../../client/pages/Home";
+import UserProfile from "../../client/pages/UserProfile";
+import About from "../../client/pages/About";
+import Contact from "../../client/pages/Contact";
+import Pricing from "../../client/pages/Pricing";
 
-import ClientLayout from "../../layouts/client/ClientLayout";
+import ClientLayout from "../../client/layout/ClientLayout";
 import ProtectedRoute from "./ProtectedRoute";
-import Pricing from "../../pages/client/Pricing";
 
 const ClientRoutes = () => {
     return (

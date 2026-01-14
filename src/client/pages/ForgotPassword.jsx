@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useUserAuth } from "../../hooks/client/useUserAuth";
+import { useUserAuth } from "../hooks/useUserAuth";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Mail, ArrowRight, MapPin } from "lucide-react";
@@ -87,7 +87,7 @@ const ForgotPassword = () => {
                         {/* Redirect */}
                         <div className="flex flex-col gap-1 justify-center items-center mt-4 text-sm text-gray-500 text-center">
                             <span>
-                                Remembered your password? <Link to={"/login"} onClick={() => scrollTo(0,0)} className="text-primaryLight font-semibold hover:underline">SignIn Now</Link>
+                                Remembered your password? <Link to={"/login"} onClick={() => scrollTo(0, 0)} className="text-primaryLight font-semibold hover:underline">SignIn Now</Link>
                             </span>
                         </div>
                     </form>

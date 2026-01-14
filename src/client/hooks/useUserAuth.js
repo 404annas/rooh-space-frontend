@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation, useRegisterMutation, useForgotPasswordMutation } from "../../features/client/auth/userApiSlice";
-import { setCredentials } from "../../features/client/auth/authSlice";
+import { useLoginMutation, useRegisterMutation, useForgotPasswordMutation } from "../features/auth/userApiSlice";
+import { setCredentials } from "../features/auth/authSlice";
 import { toast } from "sonner";
 
 export const useUserAuth = () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useUserAuth } from "../../hooks/client/useUserAuth";
+import { useUserAuth } from "../hooks/useUserAuth";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Mail, Lock, Eye, EyeOff, MapPin, ArrowRight, UserRound } from "lucide-react";
@@ -130,7 +130,7 @@ const Register = () => {
             {/* Redirect */}
             <div className="flex flex-col gap-1 justify-between items-center mt-4 text-sm text-gray-500">
               <p>By creating an account, you agree to our Terms and Privacy Policy!</p>
-              <span>Already have an account? <Link to={"/login"} onClick={() => scrollTo(0,0)} className="text-primaryLight font-semibold hover:underline">SignIn Now</Link></span>
+              <span>Already have an account? <Link to={"/login"} onClick={() => scrollTo(0, 0)} className="text-primaryLight font-semibold hover:underline">SignIn Now</Link></span>
             </div>
 
           </form>

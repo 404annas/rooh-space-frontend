@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import AdminGuard from "./AdminGuard";
-import AdminLogin from "../../pages/admin/AdminLogin";
+import AdminLogin from "../../admin/pages/AdminLogin";
 
 // Dummy components for now
 const Dashboard = () => <h1>Admin Dashboard</h1>;

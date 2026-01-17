@@ -1,6 +1,9 @@
+import Map from "../components/Map"
+
 const Home = () => {
     return (
         <>
+            <Map />
         </>
     )
 }

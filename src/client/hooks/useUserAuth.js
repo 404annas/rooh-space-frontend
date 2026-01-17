@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation, useRegisterMutation, useForgotPasswordMutation } from "../features/auth/userApiSlice";
-import { setCredentials } from "../features/auth/authSlice";
+import { useLoginMutation, useRegisterMutation, useForgotPasswordMutation, useLogoutMutation } from "../features/auth/userApiSlice";
+import { clearCredentials, setCredentials } from "../features/auth/authSlice";
 import { toast } from "sonner";
 
 export const useUserAuth = () => {
@@ -12,13 +12,14 @@ export const useUserAuth = () => {
     const [loginApi, { isLoading: isLoginLoading }] = useLoginMutation();
     const [registerApi, { isLoading: isRegisterLoading }] = useRegisterMutation();
     const [forgotPasswordApi, { isLoading: isForgotLoading }] = useForgotPasswordMutation();
+    const [logoutApi, { isLoading: isLogoutLoading }] = useLogoutMutation();
 
     const [error, setError] = useState(null);
 
-    const handleLogin = async (credentials) => {
+    const handleLogin = async (email, password) => {
         try {
             setError(null);
-            const userData = await loginApi(credentials).unwrap();
+            const userData = await loginApi({ email, password }).unwrap();
             dispatch(setCredentials({ ...userData }));
             toast.success("Login successful");
             navigate("/");
@@ -41,6 +42,19 @@ export const useUserAuth = () => {
         }
     };
 
+    const handleLogout = async () => {
+        try {
+            setError(null);
+            const userLogout = await logoutApi().unwrap();
+            dispatch(clearCredentials(userLogout))
+            toast.success("Logout Successfull")
+            navigate("/login")
+        } catch (error) {
+            setError(err?.data?.message || "Logout failed");
+            toast.error(err?.data?.message || "Logout failed");
+        }
+    }
+
     const handleForgotPassword = async (email) => {
         try {
             setError(null);
@@ -57,7 +71,8 @@ export const useUserAuth = () => {
         handleLogin,
         handleRegister,
         handleForgotPassword,
-        isLoading: isLoginLoading || isRegisterLoading || isForgotLoading,
+        handleLogout,
+        isLoading: isLoginLoading || isRegisterLoading || isForgotLoading, isLogoutLoading,
         error,
     }
 }

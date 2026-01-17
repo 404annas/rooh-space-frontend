@@ -4,7 +4,7 @@ const Button = ({ text, loadingText, disabled, onClick, isLoading, icon: Icon })
             onClick={onClick}
             disabled={disabled}
             className={`
-                bg-primaryLight text-white p-2 rounded w-full 
+                bg-primaryLight text-white px-4 py-2 rounded w-full 
                 flex items-center justify-center gap-2
                 hover:bg-primary 
                 outline-none 

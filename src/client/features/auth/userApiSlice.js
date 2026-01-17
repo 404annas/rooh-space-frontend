@@ -4,6 +4,7 @@ const LOGIN_URL = "/api/users/auth/login";
 const REGISTER_URL = "/api/users/register";
 const LOGOUT_URL = "/api/users/logout";
 const FORGOT_PASSWORD_URL = "/api/users/auth/forgot-password";
+const GET_USER_PROFILE = "/api/users/profile";
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -33,8 +34,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             })
+        }),
+        getUserProfile: builder.query({
+            query: () => ({
+                url: GET_USER_PROFILE,
+                method: "GET"
+            })
         })
     })
 })
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useForgotPasswordMutation } = userApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useForgotPasswordMutation, useGetUserProfileQuery } = userApiSlice;

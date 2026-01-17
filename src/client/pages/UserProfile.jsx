@@ -1,7 +1,14 @@
 import { MapPin, Eye, PlusCircle, UserRound } from "lucide-react";
 import manImage from "../../assets/images/man.avif"
+import { useUserAuth } from "../hooks/useUserAuth";
+import Button from "../../components/common/Button";
+import { useGetUserProfileQuery } from "../features/auth/userApiSlice";
 
 const UserProfile = () => {
+    const { handleLogout, isLoading } = useUserAuth();
+
+    const { data: userProfile } = useGetUserProfileQuery();
+
     const user = {
         name: "John Doe",
         email: "johndoe@example.com",
@@ -35,11 +42,11 @@ const UserProfile = () => {
                 {/* Profile Header */}
                 <div className="bg-transparent rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="bg-gradient-to-r from-primaryLight to-[#6B9575] h-32"></div>
-                    <div className="px-8 pb-8">
+                    <div className="px-8 pb-8 flex items-center justify-between">
                         <div className="flex flex-col md:flex-row md:items-end gap-6 -mt-16">
                             <div className="relative">
                                 <img
-                                loading="lazy"
+                                    loading="lazy"
                                     src={user.profileImage}
                                     alt="Profile"
                                     className="w-32 h-32 rounded-2xl border-4 border-white shadow-lg object-cover"
@@ -49,11 +56,14 @@ const UserProfile = () => {
                                 </div>
                             </div>
                             <div className="flex-1 md:-mb-1">
-                                <h1 className="text-3xl font-bold text-secondary mb-0">{user.name}</h1>
+                                <h1 className="text-3xl font-bold text-secondary mb-0">{userProfile?.user?.name || user.name}</h1>
                                 <p className="text-gray-600 flex items-center gap-2">
-                                    {user.email}
+                                    {userProfile?.user?.email || user.email}
                                 </p>
                             </div>
+                        </div>
+                        <div>
+                            <Button onClick={() => handleLogout()} disabled={isLoading} isLoading={isLoading} text={"Logout"} loadingText={"Loging Out..."} className="px-4"></Button>
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 // --- ICONS SETUP ---
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { SearchField } from "./SearchField";
 
 const userIcon = L.icon({
     iconUrl: markerIcon, shadowUrl: markerShadow, iconSize: [25, 41], iconAnchor: [12, 41],
@@ -31,18 +32,18 @@ const getMosqueIcon = (crowd) => {
     });
 };
 
-// const dummyMosques = [
-//     { id: 1, name: "Jamia Masjid Al-Falah", lat: 24.9010, lng: 67.1950, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true },
-//     { id: 2, name: "Madina Mosque", lat: 24.9050, lng: 67.1850, crowd: "High", nextPrayer: "Asr: 4:25 PM", isVerified: false },
-//     { id: 3, name: "City Prayer Space (Mall)", lat: 24.8980, lng: 67.1910, crowd: "Moderate", nextPrayer: "Asr: 4:30 PM", isVerified: true }
-// ];
-
 const dummyMosques = [
-    { id: 1, name: "Jamia Masjid Bait-ul-Mukarram", lat: 24.9155, lng: 67.0890, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true },
-    { id: 2, name: "Madina Mosque (Block 13)", lat: 24.9210, lng: 67.0820, crowd: "High", nextPrayer: "Asr: 4:25 PM", isVerified: false },
-    { id: 3, name: "Askari IV Prayer Hall", lat: 24.9120, lng: 67.0860, crowd: "Moderate", nextPrayer: "Asr: 4:30 PM", isVerified: true },
-    { id: 4, name: "Civic Center Masjid", lat: 24.9195, lng: 67.0760, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true }
+    { id: 1, name: "Jamia Masjid Al-Falah", lat: 24.9010, lng: 67.1950, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true },
+    { id: 2, name: "Madina Mosque", lat: 24.9050, lng: 67.1850, crowd: "High", nextPrayer: "Asr: 4:25 PM", isVerified: false },
+    { id: 3, name: "City Prayer Space (Mall)", lat: 24.8980, lng: 67.1910, crowd: "Moderate", nextPrayer: "Asr: 4:30 PM", isVerified: true }
 ];
+
+// const dummyMosques = [
+//     { id: 1, name: "Jamia Masjid Bait-ul-Mukarram", lat: 24.9155, lng: 67.0890, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true },
+//     { id: 2, name: "Madina Mosque (Block 13)", lat: 24.9210, lng: 67.0820, crowd: "High", nextPrayer: "Asr: 4:25 PM", isVerified: false },
+//     { id: 3, name: "Askari IV Prayer Hall", lat: 24.9120, lng: 67.0860, crowd: "Moderate", nextPrayer: "Asr: 4:30 PM", isVerified: true },
+//     { id: 4, name: "Civic Center Masjid", lat: 24.9195, lng: 67.0760, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true }
+// ];
 
 const AutoCenter = ({ pos, isFollowing }) => {
     const map = useMap();
@@ -77,7 +78,7 @@ const Map = () => {
                 console.error(err);
                 if (!position) setPosition([24.9179251, 67.0855616]);
             },
-            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+            { enableHighAccuracy: false, timeout: 5000, maximumAge: 10000 }
         );
         return () => navigator.geolocation.clearWatch(watchId);
     }, []);
@@ -105,6 +106,7 @@ const Map = () => {
             <MapContainer center={position} zoom={15} style={{ height: "100%", width: "100%" }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <AutoCenter pos={position} isFollowing={isFollowing} />
+                <SearchField />
                 <Circle center={position} radius={1500} pathOptions={{ color: '#15803d', fillColor: '#15803d', fillOpacity: 0.2 }} />
 
                 {selectedDestination && <Routing source={position} destination={selectedDestination} />}

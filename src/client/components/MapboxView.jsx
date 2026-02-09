@@ -176,6 +176,7 @@ const MapboxView = () => {
                 </div>
             )}
 
+            {/* Main Map */}
             <Map
                 {...viewState}
                 ref={mapRef}

@@ -1,24 +1,25 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useUserAuth } from "../hooks/useUserAuth";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Mail, Lock, Eye, EyeOff, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LoginCredentials } from "../types/auth.types";
 
 import mainImage from "../../assets/images/mainImage.avif"
 
 const Login = () => {
-    const { handleLogin, isLoading, error } = useUserAuth();
+    const { handleLogin, isLoading } = useUserAuth();
     const [showPassword, setShowPassword] = useState(false);
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm<LoginCredentials>();
 
-    const onSubmit = (data) => {
+    const onSubmit: SubmitHandler<LoginCredentials> = (data) => {
         handleLogin(data.email, data.password);
     };
 
@@ -44,7 +45,7 @@ const Login = () => {
                     <h1 className="text-xl font-semibold pb-1 pt-10 text-secondary">
                         Welcome Back!
                     </h1>
-                    <p class="text-primaryLight font-medium text-sm pb-4">
+                    <p className="text-primaryLight font-medium text-sm pb-4">
                         Sign in to find Salah spaces & share peaceful spots with others 🌿
                     </p>
 

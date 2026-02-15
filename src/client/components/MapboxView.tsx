@@ -1,28 +1,69 @@
 import { useState, useEffect, useRef } from 'react';
-import Map, { Marker, Popup, Source, Layer } from "react-map-gl/mapbox";
+import Map, { Marker, Popup, Source, Layer, ViewState, MapRef } from "react-map-gl/mapbox";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import type { Feature, Polygon } from 'geojson';
 import MosqueLoader from "../../components/common/MosqueLoader";
 import { Plus, Minus, Locate, Layers, CheckCircle2, Navigation, UsersRound, Clock, Info } from 'lucide-react';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAP_BOX_ACCESS_TOKEN;
 
+interface MapStyle {
+    id: string;
+    url: string;
+}
+
+interface Mosque {
+    id: number;
+    name: string;
+    lat: number;
+    lng: number;
+    crowd: 'High' | 'Moderate' | 'Low';
+    nextPrayer: string;
+    isVerified: boolean;
+}
+
+interface NavigationMetrics {
+    distance: string;
+    duration: number;
+}
+
+// interface GeoJSONFeature {
+//     type: 'Feature';
+//     geometry: {
+//         type: 'Polygon';
+//         coordinates: number[][][];
+//     };
+// }
+
+// interface RouteGeometry {
+//     type: 'Feature';
+//     geometry: {
+//         type: 'LineString';
+//         coordinates: number[][];
+//     };
+// }
+
 // Available Styles for the Layer Switcher
-const MAP_STYLES = [
+const MAP_STYLES: MapStyle[] = [
     { id: 'streets', url: 'mapbox://styles/mapbox/streets-v12' },
     { id: 'satellite', url: 'mapbox://styles/mapbox/satellite-streets-v12' },
     { id: 'dark', url: 'mapbox://styles/mapbox/dark-v11' }
 ];
 
-const dummyMosques = [
+const dummyMosques: Mosque[] = [
     { id: 1, name: "Jamia Masjid Al-Falah", lat: 24.9010, lng: 67.1950, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true },
     { id: 2, name: "Madina Mosque", lat: 24.9050, lng: 67.1850, crowd: "High", nextPrayer: "Asr: 4:25 PM", isVerified: false },
     { id: 3, name: "City Prayer Space (Mall)", lat: 24.8980, lng: 67.1910, crowd: "Moderate", nextPrayer: "Asr: 4:30 PM", isVerified: true }
 ];
 
-const createGeoJSONCircle = (center, radiusInKm, points = 64) => {
+const createGeoJSONCircle = (
+    center: [number, number],
+    radiusInKm: number,
+    points = 64
+): Feature<Polygon> => {
     const coords = { latitude: center[1], longitude: center[0] };
     const km = radiusInKm;
-    const ret = [];
+    const ret: number[][] = [];
     const distanceX = km / (211.32 * Math.cos((coords.latitude * Math.PI) / 180));
     const distanceY = km / 210.574;
     for (let i = 0; i < points; i++) {
@@ -32,10 +73,11 @@ const createGeoJSONCircle = (center, radiusInKm, points = 64) => {
         ret.push([coords.longitude + x, coords.latitude + y]);
     }
     ret.push(ret[0]);
-    return { type: 'Feature', geometry: { type: 'Polygon', coordinates: [ret] } };
-};
+    return { type: 'Feature', geometry: { type: 'Polygon', coordinates: [ret] }, properties: {}, };
+}
+    ;
 
-const getBearing = (start, end) => {
+const getBearing = (start: [number, number], end: [number, number]): number => {
     const startLat = (start[1] * Math.PI) / 180;
     const startLng = (start[0] * Math.PI) / 180;
     const endLat = (end[1] * Math.PI) / 180;
@@ -46,29 +88,29 @@ const getBearing = (start, end) => {
 };
 
 const MapboxView = () => {
-    const [viewState, setViewState] = useState({
+    const [viewState, setViewState] = useState<Partial<ViewState>>({
         latitude: 24.9179, longitude: 67.0855, zoom: 14, pitch: 0, bearing: 0
     });
 
-    const [userLocation, setUserLocation] = useState(null);
-    const [userHeading, setUserHeading] = useState(0);
-    const [initialSyncDone, setInitialSyncDone] = useState(false);
-    const [selectedMosque, setSelectedMosque] = useState(null);
-    const [routeData, setRouteData] = useState(null);
-    const [instructions, setInstructions] = useState(null);
-    const [navigationMetrics, setNavigationMetrics] = useState(null);
-    const [isNavigating, setIsNavigating] = useState(false);
+    const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+    const [userHeading, setUserHeading] = useState<number>(0);
+    const [initialSyncDone, setInitialSyncDone] = useState<boolean>(false);
+    const [selectedMosque, setSelectedMosque] = useState<Mosque | null>(null);
+    const [routeData, setRouteData] = useState<any>(null);
+    const [instructions, setInstructions] = useState<string | null>(null);
+    const [navigationMetrics, setNavigationMetrics] = useState<NavigationMetrics | null>(null);
+    const [isNavigating, setIsNavigating] = useState<boolean>(false);
 
     // NEW: Map Style State
-    const [styleIndex, setStyleIndex] = useState(0);
+    const [styleIndex, setStyleIndex] = useState<number>(0);
 
-    const mapRef = useRef();
+    const mapRef = useRef<MapRef | null>(null);
 
     useEffect(() => {
         const watchId = navigator.geolocation.watchPosition(
             (pos) => {
                 const { latitude, longitude, heading } = pos.coords;
-                const newPos = [longitude, latitude];
+                const newPos: [number, number] = [longitude, latitude];
                 setUserLocation(newPos);
                 setUserHeading(heading || userHeading);
 
@@ -90,13 +132,13 @@ const MapboxView = () => {
                     if (selectedMosque) getRoute(selectedMosque, newPos);
                 }
             },
-            (err) => console.error(err),
+            (err: GeolocationPositionError) => console.error(err),
             { enableHighAccuracy: true }
         );
         return () => navigator.geolocation.clearWatch(watchId);
     }, [isNavigating, selectedMosque, initialSyncDone]);
 
-    const getRoute = async (mosque, currentPos = userLocation) => {
+    const getRoute = async (mosque: Mosque, currentPos: [number, number] | null = userLocation) => {
         if (!currentPos) return;
         const resp = await fetch(`https://api.mapbox.com/directions/v5/mapbox/walking/${currentPos[0]},${currentPos[1]};${mosque.lng},${mosque.lat}?steps=true&geometries=geojson&access_token=${MAPBOX_TOKEN}`);
         const data = await resp.json();
@@ -192,7 +234,11 @@ const MapboxView = () => {
                 )}
 
                 {routeData && (
-                    <Source id="routeSource" type="geojson" data={{ type: 'Feature', geometry: routeData }}>
+                    <Source id="routeSource" type="geojson" data={{
+                        type: 'Feature',
+                        geometry: routeData,
+                        properties: {}
+                    }}>
                         <Layer id="routeLayer" type="line" paint={{ 'line-color': '#3b82f6', 'line-width': 5, 'line-opacity': 0.8 }} layout={{ 'line-join': 'round', 'line-cap': 'round' }} />
                     </Source>
                 )}
@@ -260,11 +306,12 @@ const MapboxView = () => {
                                             className="text-white fill-[#0095f6] flex-shrink-0"
                                         />
                                     ) : (
-                                        <Info
-                                            size={16}
-                                            className="text-red-500 flex-shrink-0"
-                                            title="Location not yet verified"
-                                        />
+                                        <span title="Location not yet verified">
+                                            <Info
+                                                size={16}
+                                                className="text-red-500 flex-shrink-0"
+                                            />
+                                        </span>
                                     )}
                                 </div>
 

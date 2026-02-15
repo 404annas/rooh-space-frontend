@@ -1,4 +1,4 @@
-export default function MosqueLoader() {
+const MosqueLoader = () => {
     return (
         <div className="h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
             <div className="relative">
@@ -69,3 +69,5 @@ export default function MosqueLoader() {
         </div>
     );
 }
+
+export default MosqueLoader;

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { CheckCircle2, X, Zap, Crown, Star, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Plan, FeatureCategory, FAQ, Savings } from "../types/pricing.types";
 
 const Pricing = () => {
-    const [billingCycle, setBillingCycle] = useState("monthly");
+    const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
 
-    const plans = [
+    const plans: Plan[] = [
         {
             name: "Free",
             icon: Heart,
@@ -72,7 +73,7 @@ const Pricing = () => {
         }
     ];
 
-    const features = [
+    const features: FeatureCategory[] = [
         {
             category: "Core Features",
             items: [
@@ -103,7 +104,7 @@ const Pricing = () => {
         }
     ];
 
-    const faqs = [
+    const faqs: FAQ[] = [
         {
             question: "Can I switch plans anytime?",
             answer: "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately."
@@ -122,7 +123,7 @@ const Pricing = () => {
         }
     ];
 
-    const calculateSavings = (plan) => {
+    const calculateSavings = (plan: Plan): Savings => {
         const monthlyCost = plan.price.monthly * 12;
         const yearlyCost = plan.price.yearly;
         const savings = monthlyCost - yearlyCost;

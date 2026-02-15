@@ -14,29 +14,29 @@ export const useUserAuth = () => {
     const [forgotPasswordApi, { isLoading: isForgotLoading }] = useForgotPasswordMutation();
     const [logoutApi, { isLoading: isLogoutLoading }] = useLogoutMutation();
 
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleLogin = async (email, password) => {
+    const handleLogin = async (email: string, password: string) => {
         try {
             setError(null);
             const userData = await loginApi({ email, password }).unwrap();
             dispatch(setCredentials({ ...userData }));
             toast.success("Login successful");
             navigate("/");
-        } catch (error) {
+        } catch (error: any) {
             setError(error?.data?.message || "Login failed");
             toast.error(error?.data?.message || "Login failed");
         }
     }
 
-    const handleRegister = async (name, email, password) => {
+    const handleRegister = async (name: string, email: string, password: string, confirmPassword: string) => {
         try {
             setError(null);
-            const userData = await registerApi({ name, email, password }).unwrap();
+            const userData = await registerApi({ name, email, password, confirmPassword }).unwrap();
             dispatch(setCredentials({ ...userData }));
             toast.success("Registration successful");
             navigate("/");
-        } catch (err) {
+        } catch (err: any) {
             setError(err?.data?.message || "Registration failed");
             toast.error(err?.data?.message || "Registration failed");
         }
@@ -45,23 +45,23 @@ export const useUserAuth = () => {
     const handleLogout = async () => {
         try {
             setError(null);
-            const userLogout = await logoutApi().unwrap();
-            dispatch(clearCredentials(userLogout))
-            toast.success("Logout Successfull")
+            const loggedOutUser = await logoutApi().unwrap();
+            dispatch(clearCredentials())
+            toast.success(loggedOutUser?.message || "Logout Successfull")
             navigate("/login")
-        } catch (error) {
+        } catch (err: any) {
             setError(err?.data?.message || "Logout failed");
             toast.error(err?.data?.message || "Logout failed");
         }
     }
 
-    const handleForgotPassword = async (email) => {
+    const handleForgotPassword = async (email: string) => {
         try {
             setError(null);
             const response = await forgotPasswordApi({ email }).unwrap();
             toast.success(response.message || "Reset link sent to your email!");
-            navigate("/login");
-        } catch (err) {
+            navigate("/login")
+        } catch (err: any) {
             setError(err?.data?.message || "Something went wrong");
             toast.error(err?.data?.message || "Failed to send reset link");
         }
@@ -72,7 +72,7 @@ export const useUserAuth = () => {
         handleRegister,
         handleForgotPassword,
         handleLogout,
-        isLoading: isLoginLoading || isRegisterLoading || isForgotLoading, isLogoutLoading,
+        isLoading: isLoginLoading || isRegisterLoading || isForgotLoading || isLogoutLoading,
         error,
     }
 }

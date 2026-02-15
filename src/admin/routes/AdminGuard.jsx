@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const AdminGuard = () => {
-    const { adminInfo } = useSelector((state) => state.auth);
+    const { adminInfo } = useSelector((state) => state.adminAuth);
 
     if (adminInfo && adminInfo.role === 'admin') {
         return <Outlet />;

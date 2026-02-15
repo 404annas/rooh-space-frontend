@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Mail, UserRound, ChevronDown, ArrowRight, Clock, Phone } from "lucide-react";
 import { toast } from "sonner";
+import { ContactFormData } from "../types/contact.types";
 
 const Contact = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -20,9 +21,9 @@ const Contact = () => {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm();
+    } = useForm<ContactFormData>();
 
-    const onSubmit = (data) => {
+    const onSubmit: SubmitHandler<ContactFormData> = (data) => {
         setIsLoading(true);
 
         setTimeout(() => {

@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useUserAuth } from "../hooks/useUserAuth";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Mail, ArrowRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ForgotPasswordData } from "../types/auth.types";
 
 import mainImage from "../../assets/images/mainImage.avif"
 
 const ForgotPassword = () => {
     const { handleForgotPassword, isLoading, error } = useUserAuth();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm<ForgotPasswordData>();
     const [emailSent, setEmailSent] = useState(false);
 
-    const onSubmit = async (data) => {
+    const onSubmit: SubmitHandler<ForgotPasswordData> = async (data) => {
         await handleForgotPassword(data.email);
         setEmailSent(true);
     };

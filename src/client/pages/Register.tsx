@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useUserAuth } from "../hooks/useUserAuth";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Mail, Lock, Eye, EyeOff, MapPin, ArrowRight, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
+import { RegisterData } from "../types/auth.types";
 
 import mainImage from "../../assets/images/mainImage.avif"
 
@@ -16,10 +17,10 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<RegisterData>();
 
-  const onSubmit = (data) => {
-    handleRegister(data.name, data.email, data.password);
+  const onSubmit: SubmitHandler<RegisterData> = (data) => {
+    handleRegister(data.name, data.email, data.password, data.confirmPassword);
   };
 
   return (

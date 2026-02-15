@@ -1,9 +1,10 @@
 import { MapPin, UserRound, TrendingUp, Plus } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { RootState } from '../../app/store'
 
 const Navbar = () => {
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state: RootState) => state.auth)
 
     const navLinkClass = "relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#89C392] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100";
 

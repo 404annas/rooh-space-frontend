@@ -1,4 +1,18 @@
-const Input = ({ type, placeholder, value, onChange, className, icon: Icon, ...rest }) => {
+import React from 'react';
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    icon?: React.ComponentType<{ size?: number }>;
+}
+
+const Input: React.FC<InputProps> = ({ 
+    type, 
+    placeholder, 
+    value, 
+    onChange, 
+    className, 
+    icon: Icon, 
+    ...rest 
+}) => {
     return (
         <div className="relative w-full mb-3">
             {Icon && (

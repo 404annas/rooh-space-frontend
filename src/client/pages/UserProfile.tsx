@@ -3,13 +3,15 @@ import manImage from "../../assets/images/man.avif"
 import { useUserAuth } from "../hooks/useUserAuth";
 import Button from "../../components/common/Button";
 import { useGetUserProfileQuery } from "../features/auth/userApiSlice";
+import { User } from "../types/auth.types";
 
 const UserProfile = () => {
     const { handleLogout, isLoading } = useUserAuth();
 
     const { data: userProfile } = useGetUserProfileQuery();
 
-    const user = {
+    const user: User = {
+        id: "",
         name: "John Doe",
         email: "johndoe@example.com",
         profileImage: manImage,
@@ -18,20 +20,26 @@ const UserProfile = () => {
         recentActivity: 5,
     };
 
-    const stats = [
+    interface Stat {
+        title: string;
+        value: number;
+        icon: React.ComponentType<{ size?: number; className?: string }>;
+    }
+
+    const stats: Stat[] = [
         {
             title: "Spaces Added",
-            value: user.spacesAdded,
+            value: userProfile?.user?.spacesAdded || user.spacesAdded || 12,
             icon: PlusCircle,
         },
         {
             title: "Spaces Accessed",
-            value: user.spacesAccessed,
+            value: userProfile?.user?.spacesAccessed || user.spacesAccessed || 34,
             icon: Eye,
         },
         {
             title: "Recent Activity",
-            value: user.recentActivity,
+            value: userProfile?.user?.recentActivity || user.recentActivity || 5,
             icon: MapPin,
         },
     ];
@@ -47,7 +55,7 @@ const UserProfile = () => {
                             <div className="relative">
                                 <img
                                     loading="lazy"
-                                    src={user.profileImage}
+                                    src={userProfile?.user?.profileImage || user.profileImage || manImage}
                                     alt="Profile"
                                     className="w-32 h-32 rounded-2xl border-4 border-white shadow-lg object-cover"
                                 />

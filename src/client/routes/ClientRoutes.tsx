@@ -10,6 +10,7 @@ import Pricing from "../../client/pages/Pricing";
 
 import ClientLayout from "../../client/layout/ClientLayout";
 import ProtectedRoute from "./ProtectedRoute";
+import SpaceDetails from "../pages/SpaceDetails/SpaceDetails";
 
 const ClientRoutes = () => {
     return (
@@ -19,6 +20,7 @@ const ClientRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/space-detail/:id" element={<SpaceDetails />}/>
 
             {/* --- Routes with Navbar --- */}
             <Route element={<ClientLayout />}>

@@ -35,36 +35,36 @@ const Contact = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 flex justify-center py-10 px-4">
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-5xl">
 
                 {/* --- Info Cards --- */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <div className="flex items-center gap-3 bg-white/10 p-4 rounded-xl shadow hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center gap-3 bg-white/10 p-4 rounded-xl border-2 border-purple-300 transition-all duration-300">
                         <Mail className="text-primary w-6 h-6" />
                         <div>
-                            <p className="text-sm text-gray-500">Email Us At</p>
-                            <p className="font-semibold text-secondary">support@roohspace.com</p>
+                            <p className="text-xs text-gray-500 orb">Email Us At</p>
+                            <p className="font-semibold text-sm orb text-secondary">support@roohspace.com</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 bg-white/10 p-4 rounded-xl shadow hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center gap-3 bg-white/10 p-4 rounded-xl border-2 border-blue-300 transition-all duration-300">
                         <Phone className="text-primary w-6 h-6" />
                         <div>
-                            <p className="text-sm text-gray-500">Call Us At</p>
-                            <p className="font-semibold text-secondary">+92 300 1234567</p>
+                            <p className="text-xs text-gray-500 orb">Call Us At</p>
+                            <p className="font-semibold text-sm orb text-secondary">+92 300 1234567</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 bg-white/10 p-4 rounded-xl shadow hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center gap-3 bg-white/10 p-4 rounded-xl border-2 border-green-300 transition-all duration-300">
                         <Clock className="text-primary w-6 h-6" />
                         <div>
-                            <p className="text-sm text-gray-500">Working Hours</p>
-                            <p className="font-semibold text-secondary">Mon - Fri, 9am - 6pm</p>
+                            <p className="text-xs text-gray-500 orb">Working Hours</p>
+                            <p className="font-semibold text-sm text-secondary orb">Mon - Fri, 9am - 6pm</p>
                         </div>
                     </div>
                 </div>
 
                 {/* --- Contact Form --- */}
-                <div className="bg-white rounded-xl shadow-md p-8">
-                    <h1 className="text-3xl font-bold text-primary text-center mb-4">Contact Us</h1>
+                <div className="bg-white rounded-xl shadow-sm border border-green-700 p-8">
+                    <h1 className="text-3xl font-bold text-primary text-center mb-4 orb">Contact Us</h1>
                     <p className="text-center text-gray-600 mb-8">
                         Have a question or feedback? Select your query and write us a message!
                     </p>
@@ -72,7 +72,7 @@ const Contact = () => {
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
                         {/* Name */}
                         <div>
-                            <p className="text-sm text-secondary pb-1">Full Name*</p>
+                            <p className="text-sm text-secondary pb-1 orb">Full Name*</p>
                             <Input
                                 type="text"
                                 placeholder="John Doe"
@@ -85,7 +85,7 @@ const Contact = () => {
 
                         {/* Email */}
                         <div>
-                            <p className="text-sm text-secondary pb-1">Email*</p>
+                            <p className="text-sm text-secondary pb-1 orb">Email*</p>
                             <Input
                                 type="email"
                                 placeholder="johndoe@example.com"
@@ -101,7 +101,7 @@ const Contact = () => {
 
                         {/* Query Dropdown */}
                         <div className="relative">
-                            <p className="text-sm text-secondary pb-1">Query Type*</p>
+                            <p className="text-sm text-secondary pb-1 orb">Query Type*</p>
                             <select
                                 {...register("queryType", { required: "Please select a query" })}
                                 className="w-full p-3 rounded border border-gray-300 bg-white outline-none appearance-none focus:border-[#537A5A] focus:ring-1 focus:ring-[#537A5A] cursor-pointer"
@@ -118,7 +118,7 @@ const Contact = () => {
 
                         {/* Message */}
                         <div className="mt-3">
-                            <p className="text-sm text-secondary pb-1">Message*</p>
+                            <p className="text-sm text-secondary pb-1 orb">Message*</p>
                             <textarea
                                 {...register("message", { required: "Message cannot be empty" })}
                                 rows={5}

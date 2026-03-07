@@ -134,7 +134,7 @@ const Pricing = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
             {/* Hero Section */}
-            <div className="relative bg-gradient-to-br from-[#537A5A] via-[#6B9575] to-[#537A5A] text-white overflow-hidden py-16 pb-32">
+            <div className="relative bg-gradient-to-br from-[#537A5A] via-[#6B9575] to-[#537A5A] text-white overflow-hidden py-10 pb-36">
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
                     <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -142,7 +142,7 @@ const Pricing = () => {
 
                 <div className="relative max-w-7xl mx-auto px-4 text-center">
                     <div className="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6">
-                        <span className="text-white font-semibold text-sm">FLEXIBLE PRICING</span>
+                        <span className="text-white font-semibold text-sm orb">FLEXIBLE PRICING</span>
                     </div>
                     <h1 className="text-5xl md:text-6xl font-bold mb-6">
                         Choose Your Perfect Plan
@@ -152,7 +152,7 @@ const Pricing = () => {
                     </p>
 
                     {/* Billing Toggle */}
-                    <div className="inline-flex items-center bg-white/20 backdrop-blur-sm p-2 rounded-full border border-white/30">
+                    <div className="inline-flex items-center bg-white/20 backdrop-blur-sm p-2 rounded-full border border-white/30 orb">
                         <button
                             onClick={() => setBillingCycle("monthly")}
                             className={`px-6 py-2 rounded-full font-semibold transition-all duration-200 ${billingCycle === "monthly"
@@ -189,14 +189,14 @@ const Pricing = () => {
                         return (
                             <div
                                 key={idx}
-                                className={`relative bg-white rounded-3xl shadow-md border-2 transition-all duration-300 ${plan.popular
+                                className={`relative bg-white rounded-3xl border-2 transition-all duration-300 ${plan.popular
                                     ? "border-[#537A5A] md:scale-105"
-                                    : "border-gray-200 hover:border-gray-300 hover:shadow-lg"
+                                    : "border-green-300 hover:border-green-500"
                                     }`}
                             >
                                 {plan.popular && (
                                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                                        <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-2 rounded-full font-bold text-sm shadow-lg flex items-center gap-2">
+                                        <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-2 rounded-full font-bold text-sm shadow-sm flex items-center gap-2">
                                             <Star size={16} fill="currentColor" />
                                             MOST POPULAR
                                         </div>
@@ -208,12 +208,12 @@ const Pricing = () => {
                                         <Icon size={32} className="text-white" />
                                     </div>
 
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-2 orb">{plan.name}</h3>
                                     <p className="text-gray-600 mb-6">{plan.description}</p>
 
                                     <div className="mb-6">
                                         <div className="flex items-end gap-2 mb-2">
-                                            <span className="text-5xl font-bold text-gray-900">${displayPrice}</span>
+                                            <span className="text-5xl font-bold orb text-gray-900">${displayPrice}</span>
                                             <span className="text-gray-500 mb-2">/{billingCycle === "monthly" ? "month" : "year"}</span>
                                         </div>
                                         {billingCycle === "yearly" && plan.price.yearly > 0 && (
@@ -223,7 +223,7 @@ const Pricing = () => {
                                         )}
                                     </div>
 
-                                    <button className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 mb-8 ${plan.buttonStyle}`}>
+                                    <button className={`w-full py-3 rounded-xl orb font-semibold transition-all duration-300 mb-8 ${plan.buttonStyle}`}>
                                         {plan.buttonText}
                                     </button>
 
@@ -257,7 +257,7 @@ const Pricing = () => {
             </div>
 
             {/* Trust Badges */}
-            <div className="bg-white py-12">
+            <div className="bg-white py-10">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
@@ -281,22 +281,22 @@ const Pricing = () => {
             </div>
 
             {/* Feature Comparison Table */}
-            <div className="bg-gray-50 py-20">
+            <div className="bg-gray-50 py-10">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-gray-900 mb-4">Compare Plans</h2>
+                        <h2 className="text-4xl font-bold text-gray-900 mb-4 orb">Compare Plans</h2>
                         <p className="text-base text-gray-600">See exactly what's included in each plan</p>
                     </div>
 
-                    <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div className="bg-white rounded-2xl border border-green-300 overflow-hidden">
                         <div className="overflow-x-auto">
                             <table className="w-full">
                                 <thead>
                                     <tr className="bg-gray-50 border-b border-gray-200">
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Features</th>
-                                        <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Free</th>
-                                        <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Premium</th>
-                                        <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Pro</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 orb">Features</th>
+                                        <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 orb">Free</th>
+                                        <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 orb">Premium</th>
+                                        <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 orb">Pro</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -355,18 +355,18 @@ const Pricing = () => {
             </div>
 
             {/* FAQ Section */}
-            <div className="bg-white py-20">
+            <div className="bg-white py-10">
                 <div className="max-w-5xl mx-auto px-4">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
                         <p className="text-base text-gray-600">Everything you need to know about our pricing</p>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         {faqs.map((faq, idx) => (
-                            <div key={idx} className="bg-gray-50 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-                                <h3 className="text-lg font-bold text-gray-900 mb-2">{faq.question}</h3>
-                                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                            <div key={idx} className="bg-gray-50 rounded-2xl p-6 border border-green-300 transition-all duration-300">
+                                <h3 className="text-base font-bold text-gray-900 mb-2">{faq.question}</h3>
+                                <p className="text-gray-600 leading-normal text-sm">{faq.answer}</p>
                             </div>
                         ))}
                     </div>
@@ -374,7 +374,7 @@ const Pricing = () => {
             </div>
 
             {/* CTA Section */}
-            <div className="bg-gradient-to-r from-[#537A5A] to-[#6B9575] py-20">
+            <div className="bg-gradient-to-r from-[#537A5A] to-[#6B9575] py-10">
                 <div className="max-w-4xl mx-auto px-4 text-center">
                     <h2 className="text-4xl font-bold text-white mb-6">
                         Ready to Start Your Journey?
@@ -384,13 +384,13 @@ const Pricing = () => {
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <Link to={"/register"} onClick={() => scrollTo(0, 0)}>
-                            <button className="bg-white text-[#537A5A] px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                            <button className="bg-white text-[#537A5A] px-8 py-4 rounded-xl font-semibold hover:scale-105 transition-all duration-300 flex items-center gap-2 orb">
                                 <Zap size={20} />
                                 Start Free Trial
                             </button>
                         </Link>
                         <Link to={"/contact"} onClick={() => scrollTo(0, 0)}>
-                            <button className="bg-white/10 backdrop-blur-sm text-white px-8 py-3.5 rounded-xl font-semibold border-2 border-white/30 hover:bg-white/20 transition-all duration-200">
+                            <button className="bg-white/10 backdrop-blur-sm text-white px-8 py-3.5 rounded-xl font-semibold border-2 border-white/30 hover:bg-white/20 transition-all duration-200 orb">
                                 Contact Sales
                             </button>
                         </Link>

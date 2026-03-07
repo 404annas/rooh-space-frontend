@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import Map, { Marker, Popup, Source, Layer, ViewState, MapRef } from "react-map-gl/mapbox";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import type { Feature, Polygon } from 'geojson';
-import MosqueLoader from "../../components/common/MosqueLoader";
-import { Plus, Minus, Locate, Layers, CheckCircle2, Navigation, UsersRound, Clock, Info } from 'lucide-react';
+import MosqueLoader from "../../../components/common/MosqueLoader";
+import { Plus, Minus, Locate, Layers, CheckCircle2, Navigation, UsersRound, Clock, Info, MapPin } from 'lucide-react';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAP_BOX_ACCESS_TOKEN;
 
@@ -18,6 +18,7 @@ interface Mosque {
     lat: number;
     lng: number;
     crowd: 'High' | 'Moderate' | 'Low';
+    place: "Mosque" | "Room";
     nextPrayer: string;
     isVerified: boolean;
 }
@@ -51,9 +52,9 @@ const MAP_STYLES: MapStyle[] = [
 ];
 
 const dummyMosques: Mosque[] = [
-    { id: 1, name: "Jamia Masjid Al-Falah", lat: 24.9010, lng: 67.1950, crowd: "Low", nextPrayer: "Asr: 4:30 PM", isVerified: true },
-    { id: 2, name: "Madina Mosque", lat: 24.9050, lng: 67.1850, crowd: "High", nextPrayer: "Asr: 4:25 PM", isVerified: false },
-    { id: 3, name: "City Prayer Space (Mall)", lat: 24.8980, lng: 67.1910, crowd: "Moderate", nextPrayer: "Asr: 4:30 PM", isVerified: true }
+    { id: 1, name: "Jamia Masjid Al-Falah", lat: 24.9010, lng: 67.1950, crowd: "Low", place: "Mosque", nextPrayer: "Asr: 4:30 PM", isVerified: true },
+    { id: 2, name: "Madina Mosque", lat: 24.9050, lng: 67.1850, crowd: "High", place: "Mosque", nextPrayer: "Asr: 4:25 PM", isVerified: false },
+    { id: 3, name: "City Prayer Space (Mall)", lat: 24.8980, lng: 67.1910, crowd: "Moderate", place: "Room", nextPrayer: "Asr: 4:30 PM", isVerified: true }
 ];
 
 const createGeoJSONCircle = (
@@ -291,7 +292,7 @@ const MapboxView = () => {
                         maxWidth="320px"
                         className="mosque-popup-custom"
                     >
-                        <div className="bg-white rounded-[28px] overflow-hidden shadow-2xl border border-gray-100 font-sans">
+                        <div className="bg-white rounded-[28px] overflow-hidden shadow-2xl border border-gray-100">
                             {/* Header with Background/Image placeholder (Optional sleek touch) */}
                             <div className="h-2 bg-gradient-to-r from-primary to-secondary" />
 
@@ -318,17 +319,31 @@ const MapboxView = () => {
                                 {/* Status Badges */}
                                 <div className="flex flex-wrap gap-2 mb-4">
                                     {navigationMetrics && (
-                                        <div className="flex items-center gap-1 bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full text-[11px] orb font-semibold uppercase tracking-tight">
+                                        <div className="flex items-center gap-1 bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full text-xs orb font-semibold uppercase tracking-tight">
                                             <Navigation size={12} />
                                             {navigationMetrics.duration} MINS
                                         </div>
                                     )}
-                                    <div className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-tight orb ${selectedMosque.crowd === 'High' ? 'bg-red-50 text-red-600' :
+                                    <div className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-tight orb ${selectedMosque.crowd === 'High' ? 'bg-red-50 text-red-600' :
                                         selectedMosque.crowd === 'Moderate' ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'
                                         }`}>
                                         <UsersRound size={12} />
                                         {selectedMosque.crowd} Crowd
                                     </div>
+                                </div>
+
+                                <div className='mb-4'>
+                                    {selectedMosque.place === "Room" ? (
+                                        <div className='flex items-center gap-2 bg-purple-50 text-purple-600 uppercase rounded-full font-semibold px-2.5 py-1 text-xs w-fit'>
+                                            <MapPin size={12} />
+                                            <p className='orb'>{selectedMosque.place}</p>
+                                        </div>
+                                    ) : (
+                                        <div className='flex items-center gap-2 bg-blue-50 text-blue-600 uppercase rounded-full font-semibold px-2.5 py-1 text-xs w-fit'>
+                                            <MapPin size={12} />
+                                            <p className='orb'>{selectedMosque.place}</p>
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Details Section */}
@@ -351,6 +366,14 @@ const MapboxView = () => {
                                 >
                                     Start Walking
                                     <Navigation size={18} className="group-hover:translate-x-1 transition-transform" />
+                                </button>
+
+                                <button
+                                    onClick={() => { }}
+                                    className="mt-3 w-full bg-white hover:bg-gray-50 text-primary py-3.5 rounded-full font-bold text-xs uppercase border border-green-500 shadow-sm transition-all duration-300 outline-none active:scale-95 flex items-center justify-center gap-2 orb"
+                                >
+                                    Visit {selectedMosque.place}
+                                    <MapPin size={16} />
                                 </button>
                             </div>
                         </div>

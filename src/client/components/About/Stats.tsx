@@ -12,8 +12,8 @@ const Stats = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {stats.map((stat, idx) => (
                         <div key={idx} className="text-center">
-                            <div className="text-4xl md:text-5xl font-bold text-[#537A5A] mb-2">{stat.number}</div>
-                            <div className="text-gray-600 font-medium">{stat.label}</div>
+                            <div className="text-4xl md:text-5xl orb font-bold text-[#537A5A] mb-2">{stat.number}</div>
+                            <div className="text-gray-600 font-medium orb">{stat.label}</div>
                         </div>
                     ))}
                 </div>

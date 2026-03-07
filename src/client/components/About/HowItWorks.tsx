@@ -29,11 +29,11 @@ const HowItWorks = () => {
     ];
 
     return (
-        <div className="bg-gray-50 py-20">
+        <div className="bg-gray-50 py-10">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center mb-16">
                     <div className="inline-block px-6 py-2 bg-[#537A5A]/10 rounded-full mb-4">
-                        <span className="text-[#537A5A] font-semibold text-sm">SIMPLE PROCESS</span>
+                        <span className="text-[#537A5A] font-semibold text-sm orb">SIMPLE PROCESS</span>
                     </div>
                     <h2 className="text-4xl font-bold text-gray-900 mb-4">
                         How It Works?
@@ -48,18 +48,18 @@ const HowItWorks = () => {
                         const Icon = item.icon;
                         return (
                             <div key={idx} className="relative">
-                                <div className="bg-transparent rounded-2xl p-8 shadow-sm border border-gray-200 h-full">
-                                    <div className="w-16 h-16 bg-[#537A5A] rounded-2xl flex items-center justify-center mb-6 text-white text-2xl font-bold">
+                                <div className="bg-transparent rounded-2xl p-8 shadow-sm border border-green-300 h-full">
+                                    <div className="w-16 h-16 bg-[#537A5A] rounded-2xl flex items-center justify-center mb-6 orb text-white text-2xl font-bold">
                                         {item.step}
                                     </div>
                                     <div className="w-12 h-12 bg-[#537A5A]/10 rounded-xl flex items-center justify-center mb-4">
                                         <Icon size={24} className="text-[#537A5A]" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                                    <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3 orb">{item.title}</h3>
+                                    <p className="text-gray-600 leading-normal">{item.description}</p>
                                 </div>
                                 {idx < howItWorks.length - 1 && (
-                                    <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-[#537A5A]/20"></div>
+                                    <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-green-300"></div>
                                 )}
                             </div>
                         );

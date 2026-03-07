@@ -1,4 +1,4 @@
-import MapboxView from "../components/MapboxView";
+import MapboxView from "../components/Home/MapboxView";
 
 const Home = () => {
     return (

@@ -3,17 +3,17 @@ import adminImage from "../../../assets/images/admin.avif"
 
 const AdminDesc = () => {
     return (
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-10">
             <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-12 border border-indigo-100">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
                         <div className="inline-block px-6 py-2 bg-indigo-100 rounded-full mb-4">
-                            <span className="text-indigo-700 font-semibold text-sm">FOR ADMINISTRATORS</span>
+                            <span className="text-indigo-700 font-semibold text-sm orb">FOR ADMINISTRATORS</span>
                         </div>
                         <h2 className="text-4xl font-bold text-gray-900 mb-6">
                             Powerful Admin Dashboard
                         </h2>
-                        <p className="text-base text-gray-600 mb-8 leading-relaxed">
+                        <p className="text-base text-gray-600 mb-8 leading-normal">
                             Our admin panel provides complete control over prayer space management, approvals, and analytics to ensure the platform stays accurate and helpful.
                         </p>
                         <div className="space-y-4">
@@ -22,7 +22,7 @@ const AdminDesc = () => {
                                     <Shield size={20} className="text-indigo-600" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-gray-900 mb-1">Approve & Manage Locations</h4>
+                                    <h4 className="font-semibold text-gray-900 mb-1 orb">Approve & Manage Locations</h4>
                                     <p className="text-gray-600">Verify and approve new prayer spaces submitted by users</p>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@ const AdminDesc = () => {
                                     <TrendingUp size={20} className="text-indigo-600" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-gray-900 mb-1">Analytics Dashboard</h4>
+                                    <h4 className="font-semibold text-gray-900 mb-1 orb">Analytics Dashboard</h4>
                                     <p className="text-gray-600">Track usage patterns and popular prayer spaces</p>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@ const AdminDesc = () => {
                                     <Globe size={20} className="text-indigo-600" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-gray-900 mb-1">Data Management</h4>
+                                    <h4 className="font-semibold text-gray-900 mb-1 orb">Data Management</h4>
                                     <p className="text-gray-600">Update crowd levels and location information in real-time</p>
                                 </div>
                             </div>

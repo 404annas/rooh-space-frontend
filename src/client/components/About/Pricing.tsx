@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 const Pricing = () => {
     return (
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-10">
             <div className="text-center mb-16">
                 <div className="inline-block px-6 py-2 bg-[#537A5A]/10 rounded-full mb-4">
-                    <span className="text-[#537A5A] font-semibold text-sm">FLEXIBLE PRICING</span>
+                    <span className="text-[#537A5A] font-semibold text-sm orb">FLEXIBLE PRICING</span>
                 </div>
                 <h2 className="text-4xl font-bold text-gray-900 mb-4">
                     Choose Your Perfect Plan
@@ -18,11 +18,11 @@ const Pricing = () => {
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {/* Free Plan */}
-                <div className="bg-white rounded-2xl p-8 shadow-sm border-2 border-gray-200 hover:shadow-lg transition-all duration-500">
+                <div className="bg-white rounded-2xl p-8 shadow-sm border-2 border-green-300 transition-all duration-500">
                     <div className="text-center mb-6">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">Free</h3>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2 orb">Free</h3>
                         <div className="flex items-end justify-center gap-1 mb-2">
-                            <span className="text-5xl font-bold text-gray-900">$0</span>
+                            <span className="text-5xl font-bold text-gray-900 orb">$0</span>
                             <span className="text-gray-500 mb-2">/month</span>
                         </div>
                         <p className="text-gray-600">Perfect for occasional users</p>
@@ -46,7 +46,7 @@ const Pricing = () => {
                         </li>
                     </ul>
                     <Link to={"/register"} onClick={() => scrollTo(0, 0)}>
-                        <button className="w-full bg-gray-100 text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-300">
+                        <button className="w-full bg-gray-100 text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-all orb duration-300">
                             Get Started
                         </button>
                     </Link>
@@ -54,13 +54,13 @@ const Pricing = () => {
 
                 {/* Premium Plan */}
                 <div className="bg-gradient-to-br from-[#537A5A] to-[#6B9575] rounded-2xl p-8 shadow-xl border-2 border-[#537A5A] relative transform md:scale-105">
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold orb">
                         MOST POPULAR
                     </div>
                     <div className="text-center mb-6">
-                        <h3 className="text-2xl font-bold text-white mb-2">Premium</h3>
+                        <h3 className="text-2xl font-bold text-white mb-2 orb">Premium</h3>
                         <div className="flex items-end justify-center gap-1 mb-2">
-                            <span className="text-5xl font-bold text-white">$4.99</span>
+                            <span className="text-5xl font-bold text-white orb">$4.99</span>
                             <span className="text-white/80 mb-2">/month</span>
                         </div>
                         <p className="text-white/90">For dedicated users</p>
@@ -91,17 +91,17 @@ const Pricing = () => {
                             <span className="text-white">Ad-free experience</span>
                         </li>
                     </ul>
-                    <button className="w-full bg-white text-[#537A5A] py-3 rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                    <button className="w-full bg-white text-[#537A5A] py-3 rounded-xl font-semibold hover:shadow-sm hover:scale-105 transition-all duration-300 orb">
                         Upgrade Now
                     </button>
                 </div>
 
                 {/* Pro Plan */}
-                <div className="bg-white rounded-2xl p-8 shadow-sm border-2 border-gray-200 hover:shadow-lg transition-all duration-500">
+                <div className="bg-white rounded-2xl p-8 shadow-sm border-2 border-green-300 transition-all duration-500">
                     <div className="text-center mb-6">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2 orb">Pro</h3>
                         <div className="flex items-end justify-center gap-1 mb-2">
-                            <span className="text-5xl font-bold text-gray-900">$9.99</span>
+                            <span className="text-5xl font-bold text-gray-900 orb">$9.99</span>
                             <span className="text-gray-500 mb-2">/month</span>
                         </div>
                         <p className="text-gray-600">For power users</p>
@@ -132,7 +132,7 @@ const Pricing = () => {
                             <span className="text-gray-700">Export prayer history</span>
                         </li>
                     </ul>
-                    <button className="w-full bg-gradient-to-r from-[#537A5A] to-[#6B9575] text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    <button className="w-full bg-gradient-to-r from-[#537A5A] to-[#6B9575] text-white py-3 rounded-xl font-semibold orb hover:scale-105 transition-all duration-300">
                         Go Pro
                     </button>
                 </div>

@@ -13,13 +13,13 @@ const CTA = () => {
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                     <Link to={"/register"} onClick={() => scrollTo(0,0)}>
-                        <button className="bg-white text-[#537A5A] px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                        <button className="bg-white text-[#537A5A] px-8 py-4 rounded-xl font-semibold hover:shadow-sm hover:scale-105 transition-all duration-300 flex items-center gap-2 orb">
                             <Zap size={20} />
                             Get Started Free
                         </button>
                     </Link>
                     <Link to={"/contact"} onClick={() => scrollTo(0,0)}>
-                        <button className="bg-white/10 backdrop-blur-sm text-white px-8 py-3.5 rounded-xl font-semibold border-2 border-white/30 hover:bg-white/20 transition-all duration-200">
+                        <button className="bg-white/10 backdrop-blur-sm text-white px-8 py-3.5 rounded-xl font-semibold border-2 border-white/30 hover:bg-white/20 transition-all duration-200 orb">
                             Contact Us
                         </button>
                     </Link>

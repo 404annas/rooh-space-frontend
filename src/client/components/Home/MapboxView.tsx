@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Map, { Marker, Popup, Source, Layer, ViewState, MapRef } from "react-map-gl/mapbox";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import type { Feature, Polygon } from 'geojson';
@@ -89,6 +90,7 @@ const getBearing = (start: [number, number], end: [number, number]): number => {
 };
 
 const MapboxView = () => {
+    const navigate = useNavigate();
     const [viewState, setViewState] = useState<Partial<ViewState>>({
         latitude: 24.9179, longitude: 67.0855, zoom: 14, pitch: 0, bearing: 0
     });
@@ -369,7 +371,7 @@ const MapboxView = () => {
                                 </button>
 
                                 <button
-                                    onClick={() => { }}
+                                    onClick={() => navigate(`/space-detail/${selectedMosque.id}`)}
                                     className="mt-3 w-full bg-white hover:bg-gray-50 text-primary py-3.5 rounded-full font-bold text-xs uppercase border border-green-500 shadow-sm transition-all duration-300 outline-none active:scale-95 flex items-center justify-center gap-2 orb"
                                 >
                                     Visit {selectedMosque.place}
